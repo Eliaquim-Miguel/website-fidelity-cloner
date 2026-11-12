@@ -1,0 +1,14 @@
+{
+  "name": "website-fidelity-cloner-qa-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Portable visual/geometry QA of public reference and editable clone; uses an existing Chromium browser",
+  "scripts": {
+    "qa": "node qa_playwright.mjs",
+    "check": "node --check qa_playwright.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "^1.56.1"
+  }
+}

@@ -1,0 +1,65 @@
+/* Camada de componentes próprios da Ulls Creators.
+ * Não substitui as classes do benchmark Kirvano até que cada seção seja
+ * reformulada. Assim preservamos a paridade durante a migração.
+ */
+
+:root {
+  --ulls-max-width: 1280px;
+  --ulls-section-gutter: clamp(24px, 5vw, 80px);
+  --ulls-radius-sm: 10px;
+  --ulls-radius-md: 16px;
+  --ulls-radius-lg: 24px;
+  --ulls-transition: cubic-bezier(.16, 1, .3, 1);
+}
+
+.ulls-container {
+  width: min(100%, var(--ulls-max-width));
+  margin-inline: auto;
+  padding-inline: var(--ulls-section-gutter);
+}
+
+.ulls-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--ulls-font-ui);
+  font-weight: 600;
+  line-height: 1.1;
+  border: 1px solid transparent;
+  border-radius: var(--ulls-radius-md);
+  transition: transform 260ms var(--ulls-transition), background 260ms ease, color 260ms ease;
+}
+
+.ulls-button:hover { transform: translateY(-2px); }
+.ulls-button:focus-visible { outline: 3px solid var(--ulls-mint); outline-offset: 3px; }
+.ulls-button--primary { background: var(--ulls-mint); color: var(--ulls-ink); }
+.ulls-button--primary:hover { background: var(--ulls-mint-strong); }
+.ulls-button--outline { border-color: var(--ulls-mint); color: var(--ulls-mint); }
+.ulls-button--ghost { color: inherit; }
+.ulls-button--sm { padding: 10px 14px; font-size: 13px; }
+.ulls-button--md { padding: 14px 22px; font-size: 15px; }
+.ulls-button--lg { padding: 18px 28px; font-size: 17px; }
+
+.ulls-heading { display: grid; gap: 12px; max-width: 720px; }
+.ulls-heading--center { text-align: center; margin-inline: auto; }
+.ulls-heading__eyebrow {
+  font: 500 12px/1.4 var(--ulls-font-ui);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ulls-brand-ink);
+}
+.ulls-heading h2 { font: 500 clamp(32px, 4vw, 58px)/1.08 var(--ulls-font-display); letter-spacing: -.03em; }
+.ulls-heading p { color: #737373; font: 400 16px/1.6 var(--ulls-font-ui); }
+
+.ulls-card {
+  border-radius: var(--ulls-radius-lg);
+  background: #ffffff;
+  border: 1px solid rgb(0 0 0 / 7%);
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ulls-button { transition: none; }
+}

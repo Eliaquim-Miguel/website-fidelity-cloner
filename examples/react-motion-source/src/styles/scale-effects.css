@@ -1,0 +1,131 @@
+/* Only 02-escalar.html. Needs setupScaleEffects() to attach data attributes.
+   No CSS changes to sticky/top/layout, no custom scrolling or full card overlays. */
+
+@keyframes ulls-scale-card-in {
+  from { opacity: 0; transform: translate3d(0, 46px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes ulls-scale-word-in {
+  from { opacity: 0; transform: translate3d(0, 17px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes ulls-scale-art-in {
+  from { opacity: 0; transform: translate3d(0, 58px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes ulls-scale-centered-art-in {
+  from { opacity: 0; transform: translate3d(-50%, 78px, 0); }
+  to   { opacity: 1; transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes ulls-scale-commission-pop {
+  from { opacity: 0; transform: translate3d(0, 12px, 0) scale(.9); }
+  70%  { opacity: 1; transform: translate3d(0, -2px, 0) scale(1.035); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes ulls-scale-bar-rise {
+  from { opacity: .48; transform: scaleY(.035); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] {
+  animation: ulls-scale-card-in 780ms cubic-bezier(.17,.85,.26,1) both;
+  animation-delay: calc((var(--ulls-scale-card-index, 0)) * 140ms);
+}
+
+[data-ulls-scale] [data-ulls-scale-card="1"] { --ulls-scale-card-index: 0; }
+[data-ulls-scale] [data-ulls-scale-card="2"] { --ulls-scale-card-index: 1; }
+[data-ulls-scale] [data-ulls-scale-card="3"] { --ulls-scale-card-index: 2; }
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-word] {
+  animation: ulls-scale-word-in 620ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(200ms + var(--ulls-scale-word-index, 0) * 34ms);
+}
+
+[data-ulls-scale] [data-ulls-scale-word="body"] {
+  animation-delay: calc(380ms + var(--ulls-scale-word-index, 0) * 23ms) !important;
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-art="payment"] {
+  animation: ulls-scale-art-in 850ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: 330ms;
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-art="offer"] {
+  animation: ulls-scale-centered-art-in 980ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: 340ms;
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-payrow] {
+  animation: ulls-scale-word-in 650ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(370ms + var(--ulls-scale-row-index, 0) * 110ms);
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-label] {
+  animation: ulls-scale-word-in 540ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(410ms + var(--ulls-scale-label-index, 0) * 105ms);
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-commission] {
+  animation: ulls-scale-commission-pop 640ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: 780ms;
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-commission-amount] {
+  animation: ulls-scale-word-in 470ms cubic-bezier(.16,1,.3,1) both;
+  animation-delay: 960ms;
+}
+
+[data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-bar] {
+  transform-origin: center bottom;
+  animation: ulls-scale-bar-rise 850ms cubic-bezier(.12,.88,.24,1) both;
+  animation-delay: calc(280ms + var(--ulls-scale-bar-index, 0) * 95ms);
+  /* The existing behavior changes inline height. This transition does not
+     override height values and allows 7d/30d/12m to tween smoothly. */
+  transition: height 460ms cubic-bezier(.2,.85,.25,1);
+}
+
+/* The reference's three cards are stacked sticky on mobile. We deliberately
+   do not apply overflow, position, top, height, or a transform to their grid. */
+@media (max-width: 767px) {
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] {
+    animation-duration: 690ms;
+  }
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-word] {
+    animation-duration: 500ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-word],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-art],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-payrow],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-label],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-commission],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-commission-amount],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-bar] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+  }
+
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-word],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-art="payment"],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-payrow],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-label],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-commission],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-commission-amount],
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-bar] {
+    transform: none !important;
+  }
+
+  [data-ulls-scale] [data-ulls-scale-card][data-ulls-scale-entered="true"] [data-ulls-scale-art="offer"] {
+    transform: translateX(-50%) !important;
+  }
+}

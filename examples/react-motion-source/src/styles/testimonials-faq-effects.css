@@ -1,0 +1,66 @@
+/* Kirvano testimonial ticker. Attach with setupTestimonialsEffects(root) after
+   rendering the original 09-depoimentos.html. The original section/classes
+   remain unchanged; markers are owned by the JS enhancement. */
+
+@keyframes ulls-testimonial-loop {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(calc(-1 * var(--ulls-testimonials-distance, 1080px)), 0, 0); }
+}
+
+[data-ulls-testimonials-viewport] {
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+[data-ulls-testimonials-track] {
+  animation-name: ulls-testimonial-loop;
+  animation-duration: var(--ulls-testimonials-duration, 24s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  will-change: transform;
+}
+
+/* A user can read long reviews without chasing moving text. */
+@media (hover: hover) {
+  [data-ulls-testimonials-viewport]:hover [data-ulls-testimonials-track] {
+    animation-play-state: paused;
+  }
+}
+
+[data-ulls-testimonials-viewport]:focus-within [data-ulls-testimonials-track],
+[data-ulls-testimonials-viewport][data-ulls-testimonials-touch-paused] [data-ulls-testimonials-track] {
+  animation-play-state: paused;
+}
+
+/* The markup has no data-ulls-faq-icon. The existing toggle changes
+   aria-expanded and grid-template-rows, so CSS alone should own arrow
+   orientation. Tailwind v4 uses the independent `rotate` property rather
+   than transform, hence we override `rotate` directly. */
+#faq button[aria-expanded] > span:last-child > span:last-child {
+  transition-property: rotate, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+#faq button[aria-expanded="true"] > span:last-child > span:last-child {
+  rotate: -90deg;
+}
+
+#faq button[aria-expanded="false"] > span:last-child > span:last-child {
+  rotate: 90deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ulls-testimonials-track] {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  #faq button[aria-expanded] > span:last-child > span:last-child {
+    transition: none;
+  }
+}

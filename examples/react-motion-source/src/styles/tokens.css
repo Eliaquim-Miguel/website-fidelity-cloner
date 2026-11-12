@@ -1,0 +1,74 @@
+/**
+ * Ulls Creators — design tokens
+ *
+ * Esta camada é aplicada DEPOIS da referência original. Mantemos os
+ * valores atuais para obter paridade visual antes de personalizar.
+ *
+ * Edite aqui para rebrand sem percorrer centenas de classes Tailwind.
+ */
+:root {
+  --ulls-ink: #111111;
+  --ulls-surface: #191919;
+  --ulls-surface-2: #202020;
+  --ulls-paper: #fcfbf9;
+  --ulls-foreground: #f5f5f7;
+  --ulls-mint: #82d8d0;
+  --ulls-mint-strong: #5fc9bf;
+  --ulls-brand-ink: #178a7e;
+  --ulls-font-display: "Fustat", "Inter Tight", sans-serif;
+  --ulls-font-ui: "Inter Tight", "Inter", sans-serif;
+  --ulls-font-brand: "KVN Sans Connect", sans-serif;
+
+  --brand: var(--ulls-mint);
+  --mint: var(--ulls-mint);
+  --mint-strong: var(--ulls-mint-strong);
+  --brand-ink: var(--ulls-brand-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* O runtime React original avançava a entrada do CTA ao hidratar.
+ * Sem aquele bundle, o delay SSR de 1620ms deixa o botão invisível por
+ * tempo demais. Mantemos o pop-in, mas o iniciamos mais cedo.
+ */
+[data-ulls-landing] a.anim-pop[href*="signup"] {
+  animation-delay: 550ms !important;
+}
+
+/* Card de prova social mantido estático, sem cursor fake ou efeito de seleção. */
+[data-ulls-static-proof-card] {
+  min-height: 170px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/*
+ * Cursor nativo do navegador em toda a landing. O benchmark Kirvano define
+ * cursores em SVG (pixel-art) via --cursor-arrow e --cursor-hand; a identidade
+ * Ulls não usa nenhum deles. Esta camada vem depois do CSS da referência e
+ * preserva a mão padrão apenas em elementos realmente clicáveis.
+ */
+html,
+body,
+[data-ulls-landing] {
+  cursor: auto;
+}
+
+a[href],
+button,
+[role="button"],
+summary,
+label[for],
+.cursor-pointer {
+  cursor: pointer;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}

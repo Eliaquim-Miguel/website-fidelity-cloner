@@ -1,0 +1,11 @@
+:root {
+  --brand-ink: #151515;
+  --brand-accent: #75cfc8;
+  --font-ui: system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; cursor: auto; }
+a[href], button, [role="button"] { cursor: pointer; }
+input, textarea, [contenteditable="true"] { cursor: text; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

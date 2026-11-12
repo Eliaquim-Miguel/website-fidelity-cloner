@@ -1,0 +1,4 @@
+{
+  "render_order": ["hero.html", "footer.html"],
+  "root": {"original_class": ""}
+}
